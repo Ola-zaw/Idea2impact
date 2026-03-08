@@ -13,7 +13,7 @@ export function QuizPage() {
   >(null);
   const { userProgress, addStamp, resetStamps } = useApp();
 
-  const maxStamps = 6;
+  const maxStamps = 5;
   const stampCount = userProgress.stamps.length;
   const hasAllStamps = stampCount >= maxStamps;
 
@@ -44,7 +44,11 @@ export function QuizPage() {
   };
 
   const handleClaimReward = () => {
-    if (confirm('Gratulacje! Ukończyłeś wszystkie quizy. Czy chcesz odebrać nagrodę i rozpocząć od nowa?')) {
+    if (
+      confirm(
+        "Gratulacje! Ukończyłeś wszystkie quizy. Czy chcesz odebrać nagrodę i rozpocząć od nowa?",
+      )
+    ) {
       resetStamps();
     }
   };
@@ -61,19 +65,19 @@ export function QuizPage() {
         {/* QR Scanner Button */}
         <button
           onClick={() => setIsScannerOpen(true)}
-          className="w-full bg-blue-600 text-white py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-3 mb-6"
+          className="w-full bg-primary text-white py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-3 mb-6 shadow-sm"
         >
-          <QrCode className="w-6 h-6" />
+          <QrCode className="w-5 h-5" />
           Skanuj kod QR
         </button>
 
         {/* Progress Bar */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-gray-900">
               Twój postęp
             </h2>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm font-medium text-gray-600">
               {stampCount} / {maxStamps}
             </span>
           </div>
@@ -85,14 +89,14 @@ export function QuizPage() {
                   key={index}
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                     index < stampCount
-                      ? "bg-blue-600 scale-110"
-                      : "bg-gray-200"
+                      ? "bg-primary scale-110 shadow-md"
+                      : "bg-gray-100 border border-gray-200"
                   }`}
                 >
                   {index < stampCount ? (
                     <Award className="w-5 h-5 text-white" />
                   ) : (
-                    <span className="text-gray-400 text-xs">
+                    <span className="text-gray-400 text-sm font-medium">
                       {index + 1}
                     </span>
                   )}
@@ -104,7 +108,7 @@ export function QuizPage() {
           {hasAllStamps ? (
             <button
               onClick={handleClaimReward}
-              className="w-full flex items-center justify-center gap-3 p-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-all shadow-md font-medium"
+              className="w-full flex items-center justify-center gap-3 p-3.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors shadow-sm font-medium"
             >
               <Trophy className="w-5 h-5" />
               Odbierz nagrodę!
@@ -112,7 +116,7 @@ export function QuizPage() {
           ) : (
             stampCount === maxStamps && (
               <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-center">
-                <p className="text-sm font-medium text-green-900">
+                <p className="text-sm font-medium text-green-800">
                   🎉 Gratulacje! Zdobyłeś wszystkie pieczątki!
                 </p>
               </div>
@@ -121,14 +125,14 @@ export function QuizPage() {
         </div>
 
         {/* Rules Section */}
-        <div className="bg-gray-50 rounded-lg p-6">
-          <h2 className="font-semibold text-gray-900 mb-3">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <h2 className="font-semibold text-gray-900 mb-4">
             Zasady udziału
           </h2>
 
-          <div className="space-y-3 text-sm text-gray-700">
+          <div className="space-y-4 text-sm text-gray-700">
             <div className="flex gap-3">
-              <span className="font-semibold text-blue-600 flex-shrink-0">
+              <span className="font-bold text-primary flex-shrink-0">
                 1.
               </span>
               <p>
@@ -138,7 +142,7 @@ export function QuizPage() {
             </div>
 
             <div className="flex gap-3">
-              <span className="font-semibold text-blue-600 flex-shrink-0">
+              <span className="font-bold text-primary flex-shrink-0">
                 2.
               </span>
               <p>
@@ -148,7 +152,7 @@ export function QuizPage() {
             </div>
 
             <div className="flex gap-3">
-              <span className="font-semibold text-blue-600 flex-shrink-0">
+              <span className="font-bold text-primary flex-shrink-0">
                 3.
               </span>
               <p>
@@ -158,19 +162,19 @@ export function QuizPage() {
             </div>
 
             <div className="flex gap-3">
-              <span className="font-semibold text-blue-600 flex-shrink-0">
+              <span className="font-bold text-primary flex-shrink-0">
                 4.
               </span>
               <p>
-                Zbierz wszystkie 6 pieczątek, aby otrzymać
-                nagrodę od naszych partnerów!
+                Zbierz wszystkie 5 pieczątek i odbierz nagrodę w
+                jednym z naszych punktów partnerskich!
               </p>
             </div>
           </div>
 
-          <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <p className="text-xs text-yellow-800">
-              <strong>Wskazówka:</strong> Kody QR znajdziesz
+          <div className="mt-6 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+            <p className="text-xs text-gray-700">
+              <strong className="font-semibold text-primary">Wskazówka:</strong> Kody QR znajdziesz
               przy wejściu lub w widocznym miejscu wewnątrz
               lokalizacji.
             </p>

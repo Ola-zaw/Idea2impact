@@ -1,6 +1,6 @@
-import { Location } from '../types';
-import { X, ChevronRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Location } from "../types";
+import { X, ChevronRight } from "lucide-react";
+import { motion } from "motion/react";
 
 interface MiniInfoPanelProps {
   location: Location | null;
@@ -8,24 +8,36 @@ interface MiniInfoPanelProps {
   onMoreClick: () => void;
 }
 
-export function MiniInfoPanel({ location, onClose, onMoreClick }: MiniInfoPanelProps) {
+export function MiniInfoPanel({
+  location,
+  onClose,
+  onMoreClick,
+}: MiniInfoPanelProps) {
   if (!location) return null;
 
   const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'hotel': return '🏨 Hotel';
-      case 'restaurant': return '🍽️ Restauracja';
-      case 'attraction': return '🎯 Atrakcja';
-      default: return type;
+      case "hotel":
+        return "Nocleg";
+      case "restaurant":
+        return "Restauracja";
+      case "attraction":
+        return "Inne wyjątkowe miejsce";
+      default:
+        return type;
     }
   };
 
   return (
     <motion.div
-      initial={{ y: '100%' }}
+      initial={{ y: "100%" }}
       animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      exit={{ y: "100%" }}
+      transition={{
+        type: "spring",
+        damping: 25,
+        stiffness: 300,
+      }}
       className="fixed bottom-16 left-0 right-0 bg-white rounded-t-2xl shadow-2xl z-40 max-w-md mx-auto"
     >
       <div className="p-4">
@@ -47,8 +59,7 @@ export function MiniInfoPanel({ location, onClose, onMoreClick }: MiniInfoPanelP
 
         <button
           onClick={onMoreClick}
-          className="w-full text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:opacity-90"
-          style={{ backgroundColor: '#2156ae' }}
+          className="w-full bg-primary text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:opacity-90"
         >
           Więcej
           <ChevronRight className="w-4 h-4" />

@@ -23,16 +23,19 @@ export function ListView({
     }
   };
 
-  const getTypeColor = (type: string) => {
+  const getTypeStyle = (type: string) => {
     switch (type) {
       case "hotel":
-        return "bg-blue-100 text-blue-700";
+        // Tło bez zmian, tekst to teraz głęboki granat
+        return { backgroundColor: 'rgba(91, 141, 190, 0.15)', color: '#2C5A86' };
       case "restaurant":
-        return "bg-red-100 text-red-700";
+        // Tło bez zmian, tekst to mocna, leśna zieleń
+        return { backgroundColor: 'rgba(129, 201, 149, 0.15)', color: '#27703D' };
       case "attraction":
-        return "bg-green-100 text-green-700";
+        // Tło bez zmian, tekst to mocny, rdzawy pomarańcz
+        return { backgroundColor: 'rgba(249, 200, 155, 0.15)', color: '#B35900' };
       default:
-        return "bg-gray-100 text-gray-700";
+        return { backgroundColor: '#f3f4f6', color: '#374151' };
     }
   };
 
@@ -52,13 +55,15 @@ export function ListView({
                     {location.name}
                   </h3>
                   {location.hasQuiz && (
-                    <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+                    <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
                       Quiz
                     </span>
                   )}
                 </div>
+                {/* Etykiety kategorii dostaną teraz nowy, czytelny styl */}
                 <span
-                  className={`inline-block text-xs px-2 py-1 rounded ${getTypeColor(location.type)}`}
+                  className="inline-block text-xs px-2 py-1 rounded font-medium"
+                  style={getTypeStyle(location.type)}
                 >
                   {getTypeLabel(location.type)}
                 </span>

@@ -40,21 +40,22 @@ export function QuizModal({ question, onClose, onCorrectAnswer }: QuizModalProps
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    // bg-black/50 zamiast bg-opacity-50
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-2xl max-w-md w-full p-6 relative"
+        className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-xl"
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
 
-        <div className="mb-4">
+        <div className="mb-4 pr-8">
           <h2 className="text-xl font-bold text-gray-900 mb-2">
             Quiz: {location?.name}
           </h2>
@@ -73,7 +74,8 @@ export function QuizModal({ question, onClose, onCorrectAnswer }: QuizModalProps
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               placeholder="Wpisz odpowiedź..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              // Zamiana ring-blue-500 na ring-primary
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-shadow"
               disabled={result !== null}
               autoFocus
             />
@@ -83,12 +85,13 @@ export function QuizModal({ question, onClose, onCorrectAnswer }: QuizModalProps
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3"
+              // Używamy Twojego koloru chart-3 (zielony)
+              className="mb-4 p-4 bg-[#81C995]/20 border border-[#81C995]/30 rounded-lg flex items-center gap-3"
             >
-              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-6 h-6 text-[#27703D] flex-shrink-0" />
               <div>
-                <p className="font-medium text-green-900">Brawo!</p>
-                <p className="text-sm text-green-700">Zdobywasz nową pieczątkę!</p>
+                <p className="font-semibold text-[#27703D]">Brawo!</p>
+                <p className="text-sm text-[#27703D]/80">Zdobywasz nową pieczątkę!</p>
               </div>
             </motion.div>
           )}
@@ -97,12 +100,12 @@ export function QuizModal({ question, onClose, onCorrectAnswer }: QuizModalProps
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3"
+              className="mb-4 p-4 bg-[#F9C89B]/20 border border-[#F9C89B]/50 rounded-lg flex items-center gap-3"
             >
-              <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              <XCircle className="w-6 h-6 text-orange-600 flex-shrink-0" />
               <div>
-                <p className="font-medium text-red-900">Niestety nie</p>
-                <p className="text-sm text-red-700">Spróbuj jeszcze raz!</p>
+                <p className="font-semibold text-orange-700">Niestety nie</p>
+                <p className="text-sm text-orange-600/80">Spróbuj jeszcze raz!</p>
               </div>
             </motion.div>
           )}
@@ -110,7 +113,8 @@ export function QuizModal({ question, onClose, onCorrectAnswer }: QuizModalProps
           <button
             type="submit"
             disabled={!answer.trim() || result !== null}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+            // Zmiana z bg-blue-600 na bg-primary z zachowaniem spójnego wyglądu gdy przycisk jest nieaktywny
+            className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed shadow-sm"
           >
             Sprawdź odpowiedź
           </button>

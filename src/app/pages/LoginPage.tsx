@@ -17,7 +17,8 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
+    // Zmieniono tło z gradientu na czyste białe (bg-white)
+    <div className="min-h-screen bg-white flex flex-col">
       <div className="flex-1 flex flex-col justify-center px-6 pb-20">
         <div className="max-w-md mx-auto w-full">
           <Logo />
@@ -43,7 +44,8 @@ export function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="twoj@email.pl"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    // Zmiana focus:ring na primary
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     required
                   />
                 </div>
@@ -61,23 +63,25 @@ export function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    // Zmiana focus:ring na primary
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     required
                   />
                 </div>
               </div>
 
+              {/* Użyto bg-primary zamiast wpisanego na sztywno HEXa */}
               <button
                 type="submit"
-                className="w-full text-white py-3 rounded-lg font-medium transition-colors mt-6 hover:opacity-90"
-                style={{ backgroundColor: '#2156ae' }}
+                className="w-full bg-primary text-white py-3 rounded-lg font-medium transition-opacity mt-6 hover:opacity-90 shadow-sm"
               >
                 Zaloguj się
               </button>
             </form>
 
             <div className="mt-6 text-center">
-              <a href="#" className="text-sm hover:underline" style={{ color: '#2156ae' }}>
+              {/* Użyto text-primary zamiast wpisanego na sztywno HEXa */}
+              <a href="#" className="text-sm text-primary hover:underline font-medium">
                 Nie masz konta? Zarejestruj się
               </a>
             </div>

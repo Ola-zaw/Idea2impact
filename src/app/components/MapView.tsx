@@ -25,29 +25,48 @@ const createCustomIcon = (
   hasQuiz: boolean,
 ) => {
   const colors: Record<string, string> = {
-    hotel: "#2156ae", // Niebieski
-    restaurant: "#07a761", // Zielony
-    attraction: "#f9a51d", // Pomarańczowy
+    hotel: "#5B8DBE", // Stonowany niebieski
+    restaurant: "#81C995", // Stonowany zielony
+    attraction: "#F7B981", // Stonowany pomarańczowy
   };
 
-  // Zabezpieczenie na wypadek braku typu
   const color = colors[type as string] || "#6b7280";
-  const strokeWidth = hasQuiz ? 3 : 1;
+
+  // Złota gwiazdka dla quizu, delikatna kropka dla reszty
+  const centerContent = hasQuiz
+    ? `<path d="M16 6.5 l2.2 4.5 5 .7 -3.6 3.5 .9 5 -4.5 -2.4 -4.5 2.4 .9 -5 -3.6 -3.5 5 -.7 z" fill="#F5D76E" stroke="#ffffff" stroke-width="1.5" />`
+    : `<circle cx="16" cy="12" r="3.5" fill="white" opacity="0.8"/>`;
+
+  // Jeśli wolisz "badge" w rogu zamiast gwiazdki, możesz odkomentować to:
+  /*
+  const badge = hasQuiz 
+    ? `<circle cx="24" cy="5" r="5" fill="#fbc707" stroke="#ffffff" stroke-width="1.5"/>` 
+    : '';
+  */
 
   const svg = `
-    <svg width="32" height="42" viewBox="0 0 32 42" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 0C9.373 0 4 5.373 4 12c0 9 12 28 12 28s12-19 12-28c0-6.627-5.373-12-12-12z" 
-            fill="${color}" 
-            stroke="${hasQuiz ? "#fbc707" : color}" 
-            stroke-width="${strokeWidth}"/>
-      <circle cx="16" cy="12" r="4" fill="white"/>
+    <svg width="32" height="46" viewBox="0 0 32 46" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0, 2)">
+        <path d="M16 0C9.373 0 4 5.373 4 12c0 9 12 28 12 28s12-19 12-28c0-6.627-5.373-12-12-12z" 
+              fill="${color}" 
+              stroke="rgba(0,0,0,0.15)" 
+              stroke-width="1"/>
+              
+        ${centerContent}
+        
+        </g>
     </svg>
   `;
 
+  // Dodajemy dynamiczną klasę CSS, jeśli chcielibyśmy później dodać animację
+  const markerClass = hasQuiz 
+    ? "custom-marker bg-transparent border-none drop-shadow-md z-10" 
+    : "custom-marker bg-transparent border-none drop-shadow-sm";
+
   return L.divIcon({
     html: svg,
-    className: "custom-marker bg-transparent border-none", // Reset stylów tła dla divIcon
-    iconSize: [32, 42],
+    className: markerClass,
+    iconSize: [32, 46], 
     iconAnchor: [16, 42],
     popupAnchor: [0, -42],
   });

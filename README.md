@@ -1,7 +1,7 @@
 
-  # Łebski Lokals
+  # Mobilna aplikacja turystyczna
 
-  This is a code bundle for Łebski Lokals. The original project is available at https://www.figma.com/design/nPGc4bJlmVavjEk7ZIg85a/%C5%81ebski-Lokals.
+  This is a code bundle for Mobilna aplikacja turystyczna. The original project is available at https://www.figma.com/design/nPGc4bJlmVavjEk7ZIg85a/Mobilna-aplikacja-turystyczna.
 
   ## Running the code
 

@@ -49,10 +49,10 @@ export function DiscoverPage() {
   };
 
   const filterOptions = [
-    { value: 'hotel' as const, label: '🏨 Hotele' },
-    { value: 'restaurant' as const, label: '🍽️ Restauracje' },
-    { value: 'attraction' as const, label: '🎯 Atrakcje' },
-    { value: 'quiz' as const, label: '✨ Z quizem' },
+    { value: 'hotel' as const, label: 'Hotele' },
+    { value: 'restaurant' as const, label: 'Restauracje' },
+    { value: 'attraction' as const, label: 'Atrakcje' },
+    { value: 'quiz' as const, label: 'Z quizem' },
   ];
 
   return (
@@ -67,10 +67,9 @@ export function DiscoverPage() {
             onClick={() => setViewMode('map')}
             className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors ${
               viewMode === 'map' 
-                ? 'text-white' 
+                ? 'bg-primary text-white' 
                 : 'bg-gray-100 text-gray-700'
             }`}
-            style={viewMode === 'map' ? { backgroundColor: '#2156ae' } : {}}
           >
             <Map className="w-4 h-4" />
             Mapa
@@ -79,10 +78,9 @@ export function DiscoverPage() {
             onClick={() => setViewMode('list')}
             className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors ${
               viewMode === 'list' 
-                ? 'text-white' 
+                ? 'bg-primary text-white' 
                 : 'bg-gray-100 text-gray-700'
             }`}
-            style={viewMode === 'list' ? { backgroundColor: '#2156ae' } : {}}
           >
             <List className="w-4 h-4" />
             Lista

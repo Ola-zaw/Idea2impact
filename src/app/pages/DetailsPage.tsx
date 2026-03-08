@@ -19,7 +19,7 @@ export function DetailsPage() {
       <div className="sticky top-0 bg-white z-10 border-b border-gray-200">
         <div className="flex items-center px-4 py-3">
           <button 
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/discover')}
             className="mr-3"
           >
             <ArrowLeft className="w-6 h-6 text-gray-700" />
@@ -96,8 +96,7 @@ export function DetailsPage() {
                   href={location.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
-                  style={{ backgroundColor: '#2156ae' }}
+                  className="flex items-center justify-between w-full bg-primary text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
                 >
                   <span className="font-medium">Odwiedź stronę</span>
                   <ExternalLink className="w-4 h-4" />
@@ -140,8 +139,7 @@ export function DetailsPage() {
                 href={location.bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between w-full text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
-                style={{ backgroundColor: '#2156ae' }}
+                className="flex items-center justify-between w-full bg-primary text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
               >
                 <span className="font-medium">Zobacz stronę pensjonatu</span>
                 <ExternalLink className="w-4 h-4" />
@@ -165,8 +163,7 @@ export function DetailsPage() {
                 href={location.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between w-full text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
-                style={{ backgroundColor: '#2156ae' }}
+                className="flex items-center justify-between w-full bg-primary text-white py-3 px-4 rounded-lg transition-colors hover:opacity-90"
               >
                 <span className="font-medium">Więcej informacji</span>
                 <ExternalLink className="w-4 h-4" />
