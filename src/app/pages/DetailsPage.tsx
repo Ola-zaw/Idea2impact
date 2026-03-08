@@ -16,16 +16,22 @@ export function DetailsPage() {
   return (
     <div className="min-h-screen bg-white pb-20">
       {/* Header */}
-      <div className="sticky top-0 bg-white z-10 border-b border-gray-200">
-        <div className="flex items-center px-4 py-3">
-          <button 
-            onClick={() => navigate('/discover')}
-            className="mr-3"
-          >
-            <ArrowLeft className="w-6 h-6 text-gray-700" />
-          </button>
+      {/* min-h-[96px] odpowiada dokładnej wysokości Twojego komponentu Logo (64px logo + 32px paddingu) */}
+      <div className="sticky top-0 bg-white z-10 border-b border-gray-200 relative flex items-center px-4 min-h-[64px]">
+        
+        {/* Przycisk Wstecz (zawsze po lewej stronie, wyśrodkowany w pionie) */}
+        <button 
+          onClick={() => navigate('/discover')}
+          className="relative z-20 p-2 -ml-2 text-gray-700 hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        
+        {/* Logo w 100% swoim oryginalnym rozmiarze, rzucone absolutnie na sam środek */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <Logo />
         </div>
+
       </div>
 
       <div className="px-6 py-4">
