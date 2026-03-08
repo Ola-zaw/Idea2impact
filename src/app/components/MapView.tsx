@@ -1,0 +1,95 @@
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { Location, LocationType } from "../types";
+
+// Naprawa domyślnych ikon znaczników w Leaflet
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
+
+interface MapViewProps {
+  locations: Location[];
+  onMarkerClick: (location: Location) => void;
+}
+
+// Tworzenie niestandardowych znaczników
+const createCustomIcon = (
+  type: LocationType,
+  hasQuiz: boolean,
+) => {
+  const colors: Record<string, string> = {
+    hotel: "#2156ae", // Niebieski
+    restaurant: "#07a761", // Zielony
+    attraction: "#f9a51d", // Pomarańczowy
+  };
+
+  // Zabezpieczenie na wypadek braku typu
+  const color = colors[type as string] || "#6b7280";
+  const strokeWidth = hasQuiz ? 3 : 1;
+
+  const svg = `
+    <svg width="32" height="42" viewBox="0 0 32 42" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C9.373 0 4 5.373 4 12c0 9 12 28 12 28s12-19 12-28c0-6.627-5.373-12-12-12z" 
+            fill="${color}" 
+            stroke="${hasQuiz ? "#fbc707" : color}" 
+            stroke-width="${strokeWidth}"/>
+      <circle cx="16" cy="12" r="4" fill="white"/>
+    </svg>
+  `;
+
+  return L.divIcon({
+    html: svg,
+    className: "custom-marker bg-transparent border-none", // Reset stylów tła dla divIcon
+    iconSize: [32, 42],
+    iconAnchor: [16, 42],
+    popupAnchor: [0, -42],
+  });
+};
+
+export function MapView({
+  locations,
+  onMarkerClick,
+}: MapViewProps) {
+  return (
+    // Dodano relative oraz min-h-[500px] jako zabezpieczenie, gdyby rodzic nie miał wysokości
+    <div className="w-full h-full min-h-[500px] relative z-0">
+      <MapContainer
+        center={[54.7558, 17.5489]} // Współrzędne Łeby
+        zoom={14}
+        // Pozycjonowanie absolutne wymusza dopasowanie mapy do diva okalającego
+        style={{
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {locations.map((location) => (
+          <Marker
+            key={location.id}
+            position={location.coordinates}
+            icon={createCustomIcon(
+              location.type,
+              location.hasQuiz,
+            )}
+            eventHandlers={{
+              click: () => onMarkerClick(location),
+            }}
+          />
+        ))}
+      </MapContainer>
+    </div>
+  );
+}
