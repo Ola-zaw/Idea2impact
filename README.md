@@ -1,4 +1,4 @@
-### Łebski Lokals
+# Łebski Lokals
 
 Projekt zrealizowany podczas hackathonu **Idea2Impact** w Gdańsku dla stowarzyszenia **Pomorski Dom**.
 
